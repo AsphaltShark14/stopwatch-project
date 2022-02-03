@@ -1,0 +1,127 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <style>
+        body{
+            background-color: #e9967a;
+            color: rgba(43, 41, 41, 0.76);
+            font-family: 'Roboto';
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .wrapper{
+            max-width: 600px;
+            height: auto;
+            margin: 50px auto;
+            text-align: center;
+            background: rgb(255, 255, 255);
+            border-radius: 5px;
+            box-shadow: 10px 10px 0 rgb(0, 0, 0, 0.1);
+        }
+
+        h1{
+            margin-bottom: 25px;
+            padding-top: 25px;
+            font-size: 5em;
+            color: lightsalmon;
+            text-shadow: 5px 5px 0 rgb(0,0,0,0.1);
+        }
+
+        p{
+            font-size: 3em;
+            margin: auto;
+        }
+
+        button {
+            background-image: linear-gradient(135deg, #f0769c 50%, #e9967a);
+            border: 0;
+            border-radius: 10px;
+            margin: 25px 10px 50px;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            font-family: "Codec cold",sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            height: 54px;
+            letter-spacing: .4px;
+            line-height: 1;
+            max-width: 100%;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 3px;
+            text-decoration: none;
+            user-select: none;
+        }
+
+        button:active {
+            outline: 0;
+        }
+
+        button:hover {
+            outline: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Stopwatch</h1>
+        <p class="time">00:00</p>
+        <button class="start">START</button>
+        <button class="stop">STOP</button>
+        <button class="reset">RESET</button>
+    </div>
+    <script>
+        const buttons = document.querySelectorAll('button');
+        const time = document.querySelector('.time');
+        let count;
+
+        function countTime() {
+            let minutes = 0;
+            let seconds = 0;
+            
+            clearInterval(count);
+            
+            count = setInterval(() => {
+                seconds++;
+
+                if(seconds == 60) {
+                    seconds = 0;
+                    minutes++;
+                }
+
+                time.textContent = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            },1000)
+        }
+
+        function startCount() {
+            countTime();
+        }
+
+        function stopCount() {
+            clearInterval(count);
+        }
+
+        function resetCount() {
+            time.textContent = '00:00';
+        }
+
+        buttons.forEach(button => button.addEventListener('click', e => {
+            if(e.target.classList.contains('start')){
+                startCount();
+            } else if(e.target.classList.contains('stop')){
+                stopCount();
+            } else if(e.target.classList.contains('reset')){
+                resetCount();
+            }
+        }))
+
+        
+    </script>
+</body>
+</html>
