@@ -79,13 +79,11 @@
     <script>
         const buttons = document.querySelectorAll('button');
         const time = document.querySelector('.time');
+        let seconds = 0;
+        let minutes = 0;
         let count;
 
         function countTime() {
-            let minutes = 0;
-            let seconds = 0;
-            
-            clearInterval(count);
             
             count = setInterval(() => {
                 seconds++;
